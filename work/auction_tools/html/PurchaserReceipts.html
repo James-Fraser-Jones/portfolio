@@ -1,0 +1,62 @@
+<link rel="stylesheet" href="https://ssl.gstatic.com/docs/script/css/add-ons1.css">
+
+<!DOCTYPE html>
+<html>
+
+<head>
+<style>
+/* Center the loader */
+#loader {
+  position: fixed;
+  display: none;
+  left: 240px;
+  top: 127px;
+  z-index: 1;
+  width: 150px;
+  height: 150px;
+  margin: -75px 0 0 -75px;
+  border: 8px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 8px solid #3498db;
+  width: 12px;
+  height: 12px;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+</style>
+</head>
+
+<body>
+
+<form action="/action_page.php">
+   This process may take several minutes. <div id="loader"></div>
+   <br><br>
+  <input type="button" value="Create" class="create" onmouseup="createClicked()" id="create">
+  <input type="button" value="Close" onmouseup="google.script.host.close()">
+</form>
+
+<script>
+  function createClicked() {
+    document.getElementById("create").disabled = true;
+    google.script.run.withSuccessHandler(onSuccess).createUnpaidReceipts();
+    document.getElementById("loader").style.display = "block";
+  };
+
+  function onSuccess(data) {
+    google.script.host.close();
+  }
+</script>
+
+</body>
+</html>

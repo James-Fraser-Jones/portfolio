@@ -1,0 +1,127 @@
+<link rel="stylesheet" href="https://ssl.gstatic.com/docs/script/css/add-ons1.css">
+
+<!DOCTYPE html>
+<html>
+
+<head>
+<style>
+/* Center the loader */
+#loader {
+  position: fixed;
+  display: none;
+  left: 257px;
+  top: 92px;
+  z-index: 1;
+  width: 150px;
+  height: 150px;
+  margin: -75px 0 0 -75px;
+  border: 8px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 8px solid #3498db;
+  width: 12px;
+  height: 12px;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+</style>
+</head>
+
+<body>
+
+<form action="/action_page.php">
+   Customer Number:<br>
+  <input type="text" id="customerNum" value=""> <div id="loader"></div>
+  <br><br>
+  <input type="button" value="Auto Pay" class="action" onmouseup="autoPayClicked()" id="autopay">
+  <input type="button" value="Pay" onmouseup="payClicked()" id="pay">
+  <input type="button" value="Receipt" onmouseup="getReceiptClicked()" id="receipt">
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <input type="button" value="Vendor" onmouseup="vendorClicked()" id="vendor">
+  <br>
+  Show all items <input type="checkbox" id="check">
+</form>
+
+<script>
+
+/*
+<form action="/action_page.php">
+<br> &nbsp; &nbsp; Purchaser Number:
+<br> &nbsp; &nbsp; <input type="text" id="purchaserNum" value=""> <div id="loader"></div>
+<br><br> &nbsp; &nbsp;
+<input type="button" value="Auto Pay" class="action" onmouseup="autoPayClicked()">
+<input type="button" value="Pay" onmouseup="payClicked()">
+<input type="button" value="Receipt" onmouseup="getReceiptClicked()">
+<br><br> &nbsp; &nbsp;
+Show all items <input type="checkbox" id="check">
+</form>
+*/
+
+  function autoPayClicked() {
+    enableButtons(false);
+    var purchaserNum = document.getElementById("customerNum").value;
+    var checked = document.getElementById("check").checked;
+    google.script.run.withSuccessHandler(autoPaySuccess).autoPay(purchaserNum, checked);
+    document.getElementById("loader").style.display = "block";
+  };
+
+  function payClicked() {
+    enableButtons(false);
+    var purchaserNum = document.getElementById("customerNum").value;
+    google.script.run.withSuccessHandler(paySuccess).pay(purchaserNum);
+    document.getElementById("loader").style.display = "block";
+  };
+
+  function getReceiptClicked() {
+    enableButtons(false);
+    var purchaserNum = document.getElementById("customerNum").value;
+    var checked = document.getElementById("check").checked;
+    google.script.run.withSuccessHandler(receiptSuccess).getPurchaserReceipt(purchaserNum, checked);
+    document.getElementById("loader").style.display = "block";
+  };
+
+  function vendorClicked(){
+    enableButtons(false);
+    var vendorNum = document.getElementById("customerNum").value;
+    google.script.run.withSuccessHandler(vendorSuccess).standaloneVendor(vendorNum);
+    document.getElementById("loader").style.display = "block";
+  }
+
+  function autoPaySuccess(data) {
+    document.getElementById("loader").style.display = "none";
+    enableButtons(true);
+  }
+  function paySuccess(data) {
+    document.getElementById("loader").style.display = "none";
+    enableButtons(true);
+  }
+  function receiptSuccess(data) {
+    document.getElementById("loader").style.display = "none";
+    enableButtons(true);
+  }
+  function vendorSuccess(data) {
+    document.getElementById("loader").style.display = "none";
+    enableButtons(true);
+  }
+
+  function enableButtons(enable) {
+    document.getElementById("autopay").disabled = !enable;
+    document.getElementById("pay").disabled = !enable;
+    document.getElementById("receipt").disabled = !enable;
+    document.getElementById("vendor").disabled = !enable;
+  }
+</script>
+
+</body>
+</html>

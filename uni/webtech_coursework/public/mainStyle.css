@@ -1,0 +1,77 @@
+body {
+    background-color: aquamarine;
+    font-family: "Trebuchet MS", Helvetica, sans-serif;
+    color: black;
+    margin-left: 25px;
+}
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    cursor: pointer;
+}
+
+th {
+    background-color: #888888;
+}
+
+td, th {
+    border: 1px solid #000000;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #cccccc;
+}
+
+tr:nth-child(odd) {
+    background-color: white;
+}
+
+button {
+    font-family: arial, sans-serif;
+    width: 100px;
+    height: 40px;
+}
+
+input {
+    font-size: 16px;
+    height: 30px;
+}
+
+#itemsInput label {
+    display:block;
+    float:left;
+    margin-right:8px;
+    vertical-align:top;
+}
+
+#addItemButton, #signinButton, #signoutButton, #signupButton, #deleteaccountButton {
+  align-self: flex-end;
+  margin-right:5px;
+}
+
+#deleteaccountButton {
+  width: 150px;
+}
+
+#itemsInput {
+    display: flex;
+    overflow: auto;
+    vertical-align: baseline;
+}
+
+banner h2 {
+    display:inline;
+    margin-right:20px;
+}
+
+#userBlock, #itemBlock, #inputBlock{
+    margin-right:20px;
+    float:left;
+}
+
+#loginMessage{
+  float:right;
+}

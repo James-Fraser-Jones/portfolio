@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Sign In</title>
+<link rel="stylesheet" type="text/css" href="mainStyle.css"></link>
+</head>
+
+<body>
+
+  <script src="loginScript.js" defer="defer"></script>
+
+  <h3 id="loginMessage">logged in as: {{username}}</h3>
+
+  <banner>
+    <h2><a href="/">Home</a></h2>
+    <h2><a href="/market">Market</a></h2>
+    <h2><a href="/login">Sign In / Out</a></h2>
+  </banner>
+
+  <h1>Sign In / Out</h1>
+
+  <div id="itemsInput">
+    <label>
+      Username:<br/>
+      <input id="userInput"></input>
+    </label>
+
+    <label>
+      Password:<br/>
+      <input id="passInput" type="password"></input>
+    </label>
+
+    <label>
+      Profile Name:<br/>
+      <input id="nameInput"></input>
+    </label>
+  </div>
+
+  <br/>
+
+  <div>
+    <button id="signinButton">Sign In</button>
+    <button id="signupButton">Sign Up</button>
+    <button id="signoutButton">Sign Out</button>
+    <button id="deleteaccountButton">Delete Account</button>
+  </div>
+
+</body>
+
+</html>

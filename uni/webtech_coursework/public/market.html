@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Market</title>
+<link rel="stylesheet" type="text/css" href="mainStyle.css"></link>
+</head>
+
+<body>
+
+  <script src="marketScript.js" defer="defer"></script>
+
+  <h3 id="loginMessage">logged in as: {{username}}</h3>
+
+  <banner>
+    <h2><a href="/">Home</a></h2>
+    <h2><a href="/market">Market</a></h2>
+    <h2><a href="/login">Sign In / Out</a></h2>
+  </banner>
+
+  <h1>Market</h1>
+
+  <div id="userBlock">
+    <h2>User Info</h2>
+    <table id="userTable">
+      <tr class="header">
+        <th>ID</th>
+        <th>Username</th>
+        <th>Password</th>
+        <th>Name</th>
+        <th>Funds</th>
+      </tr>
+      {{#users}} <tr>
+        <td>{{id}}</td>
+        <td>{{username}}</td>
+        <td>{{password}}</td>
+        <td>{{name}}</td>
+        <td>{{money}}</td>
+      </tr> {{/users}}
+    </table>
+  </div>
+
+  <div id="itemBlock">
+    <h2>Items</h2>
+    <table id="itemTable">
+      <tr class="header">
+        <th>ID</th>
+        <th>Owner</th>
+        <th>Description</th>
+        <th>Price</th>
+      </tr>
+      {{#items}} <tr>
+        <td>{{id}}</td>
+        <td>{{name}}</td>
+        <td>{{description}}</td>
+        <td>{{price}}</td>
+      </tr> {{/items}}
+    </table>
+  </div>
+
+  <div id="inputBlock">
+    <div>
+      <h2>Add Items</h2>
+      <div id="itemsInput">
+        <label>
+          Description:<br/>
+          <input id="descInput"></input>
+        </label>
+
+        <label>
+          Price:<br/>
+          <input id="priceInput"></input>
+        </label>
+
+        <button id="addItemButton">Add</button>
+      </div>
+    </div>
+
+    <div>
+      <h2>Buy and Delete Items</h2>
+      <button id="buyButton">Buy</button>
+      <button id="removeItemButton">Delete</button>
+    </div>
+
+    <div>
+      <h2>Add or Remove Funds</h2>
+      <div>
+        <label>
+          Funds:<br/>
+          <input id="fundsInput"></input>
+        </label>
+
+        <button id="addFundsButton">Add</button>
+        <button id="removeFundsButton">Remove</button>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html>

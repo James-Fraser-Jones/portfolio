@@ -1,0 +1,99 @@
+<link rel="stylesheet" href="https://ssl.gstatic.com/docs/script/css/add-ons1.css">
+
+<!DOCTYPE html>
+<html>
+
+<head>
+<style>
+/* Center the loader */
+#loader {
+  position: fixed;
+  display: none;
+  left: 285px;
+  top: 496px;
+  z-index: 1;
+  width: 150px;
+  height: 150px;
+  margin: -75px 0 0 -75px;
+  border: 8px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 8px solid #3498db;
+  width: 12px;
+  height: 12px;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+</style>
+</head>
+
+<body>
+
+<form action="/action_page.php">
+   <b>Auction Information</b> <br><br>
+   Name: <br> <input type="text" id="name"> <br>
+   Address: <br> <input type="text" id="address"> <br>
+   Telephone: <br> <input type="text" id="telephone"> <br>
+   Website: <br> <input type="text" id="website"> <br>
+   Email: <br> <input type="text" id="email"> <br><br>
+
+   <b>Automatic Sharing</b> <br><br>
+
+   <div>
+   <input type="checkbox" id="check">
+   <label for="check">Share edit privileges for auction spreadsheets.</label>
+   </div>
+
+   <br> Sharing Email: <br> <input type="text" id="semail"> <br><br>
+
+  <input type="button" value="Save changes" class="action" onmouseup="saveClicked()" id="save">
+  <input type="button" value="Discard changes" onmouseup="google.script.host.close()" id="discard">
+  <div id="loader"></div>
+</form>
+
+<script>
+  google.script.run.withSuccessHandler(getValues).getUserSettings();
+  function getValues(properties){
+    for (key in properties){
+     document.getElementById(key).value = properties[key];
+    }
+
+    document.getElementById('check').checked = (properties['check'] == 'true'); //workaround for now
+  }
+
+  function saveClicked() {
+    document.getElementById("save").disabled = true;
+    document.getElementById("discard").disabled = true;
+    document.getElementById("loader").style.display = "block";
+
+    var textFields = ['name', 'address', 'telephone', 'website', 'email', 'semail'];
+    var checkFields = ['check'];
+
+    var newProperties = new Object();
+    for (var i = 0; i < textFields.length; i++){
+      newProperties[textFields[i]] = document.getElementById(textFields[i]).value;
+    }
+    for (var i = 0; i < checkFields.length; i++){
+      newProperties[checkFields[i]] = document.getElementById(checkFields[i]).checked;
+    }
+
+    google.script.run.withSuccessHandler(onSuccess).setUserSettings(newProperties);
+  }
+  function onSuccess(data) {
+    google.script.host.close();
+  }
+
+</script>
+
+</body>
+</html>
